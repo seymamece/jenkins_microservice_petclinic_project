@@ -413,6 +413,9 @@ git checkout dev
 git merge feature/msp-7
 git push origin dev
 ```
+```bash
+./mvnw clean
+```
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 ## MSP 8 - Create Docker Compose File for Local Development
