@@ -1,0 +1,1 @@
+chmod +x package-with-mvn-wrapper.sh
