@@ -356,7 +356,7 @@ ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 ``` bash
 git add .
-git commit -m 'added Dockerfiles for microservices'
+git commit -m 'added Dockerfiles'
 git push --set-upstream origin feature/msp-6
 git checkout dev
 git merge feature/msp-6
