@@ -1408,6 +1408,15 @@ sed -i "s/clarus/$ANS_KEYPAIR/g" main.tf
 terraform init
 terraform apply -auto-approve -no-color
 ```
+
+```bash
+PATH="$PATH:/usr/local/bin"
+ANS_KEYPAIR="petclinic-ansible-test-dev.key"
+AWS_REGION="us-east-1"
+cd infrastructure/dev-k8s-terraform
+terraform destroy -auto-approve -no-color
+```
+
   * Click `Save`
 
   * Click `Build Now`
