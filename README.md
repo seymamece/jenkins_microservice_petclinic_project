@@ -2223,7 +2223,7 @@ driver.close()
     with_items: "{{ output.results }}"
 ```
 
-- Prepare a script to run the playbook for dummy selenium job on Jenkins Server (localhost) and save it as `run_dummy_selenium_job.sh` under `ansible/scripts` folder.
+- Prepare a script to run the playbook for dummy selenium job on Jenkins Server (localhost) and save it as n_dummy_selenium_job.sh`ru` under `ansible/scripts` folder.
 
 ```bash
 PATH="$PATH:/usr/local/bin"
