@@ -3082,26 +3082,25 @@ sudo hostnamectl set-hostname rancher-instance-1
 sudo apt-get update -y
 sudo apt-get upgrade -y
 # Update the apt package index and install packages to allow apt to use a repository over HTTPS
-sudo apt-get install \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  gnupg \
-  lsb-release
+sudo apt-get update
+sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 # Add the repository to Apt sources:
 echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
+# RKE is not compatible with the current Docker version (v23 hence we need to install an earlier version of Docker)
+# List the available versions:
+
+apt-cache madison docker-ce | awk '{ print $3 }'
+
 # Install and start Docker
-# RKE is not compatible with the current Docker version (v23 hence we need to install an earlier version of Docker
-sudo apt-get install docker-ce=5:20.10.24~3-0~ubuntu-jammy  docker-ce-cli=5:20.10.24~3-0~ubuntu-jammy containerd.io docker-compose-plugin
+sudo apt-get install docker-ce=5:20.10.24~3-0~ubuntu-jammy  docker-ce-cli=5:20.10.24~3-0~ubuntu-jammy containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl start docker
 sudo systemctl enable docker
 
